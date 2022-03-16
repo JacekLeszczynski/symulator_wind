@@ -33,18 +33,22 @@ type
 
   { TeElement }
 
+  (* To jest moja klasa główna elementów,                    *)
+  (* wszystkie elementy będą budowane na tej właśnie klasie. *)
+
   TeElement = class
   private
     FID: integer;
     FPins: TePins;
     FState: boolean;
+    procedure SetState(AValue: boolean);
   protected
   public
-    constructor Create(aID: integer);
+    constructor Create(aID: integer; aCountPins: integer);
     destructor Destroy; override;
   published
     property Identificator: integer read FID write FID;
-    property State: boolean read FState write FState default false;
+    property State: boolean read FState write SetState default false;
     property Pins: TePins read FPins write FPins;
   end;
 
@@ -57,22 +61,28 @@ type
 
   { TePrzycisk }
 
-  TePrzycisk = class
+  TePrzycisk = class(TeElement)
   private
-    FID: integer;
-    FState: boolean;
-    FSysExec: TUnitElementySysExecute;
-    procedure SetState(AValue: boolean);
   public
-    constructor Create(aID: integer);
+    constructor Create(aID: integer; aCountPins: integer);
     destructor Destroy; override;
   published
-    property Identificator: integer read FID;
-    property State: boolean read FState write SetState;
-    property OnSysExecute: TUnitElementySysExecute read FSysExec write FSysExec;
+    //property OnSysExecute: TUnitElementySysExecute read FSysExec write FSysExec;
   end;
 
 implementation
+
+{ TePrzycisk }
+
+constructor TePrzycisk.Create(aID: integer; aCountPins: integer);
+begin
+  inherited Create(aID, aCountPins);
+end;
+
+destructor TePrzycisk.Destroy;
+begin
+  inherited Destroy;
+end;
 
 { TePins }
 
@@ -121,35 +131,25 @@ end;
 
 { TeElement }
 
-constructor TeElement.Create(aID: integer);
+procedure TeElement.SetState(AValue: boolean);
+begin
+  if FState=AValue then Exit;
+  FState:=AValue;
+end;
+
+constructor TeElement.Create(aID: integer; aCountPins: integer);
+var
+  i: integer;
 begin
   FID:=aID;
   FState:=false;
   FPins:=TePins.Create;
+  for i:=1 to aCountPins do FPins.Add(piZero);
 end;
 
 destructor TeElement.Destroy;
 begin
   FPins.Free;
-  inherited Destroy;
-end;
-
-{ TePrzycisk }
-
-procedure TePrzycisk.SetState(AValue: boolean);
-begin
-  if FState=AValue then Exit;
-  FState:=AValue;
-  if assigned(FSysExec) then FSysExec(self,'przycisk',FID);
-end;
-
-constructor TePrzycisk.Create(aID: integer);
-begin
-  FID:=aID;
-end;
-
-destructor TePrzycisk.Destroy;
-begin
   inherited Destroy;
 end;
 

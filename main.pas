@@ -14,8 +14,7 @@ type
 
   TForm1 = class(TForm)
     Button1: TButton;
-    Button2: TButton;
-    ExtMessage1: TExtMessage;
+    mess: TExtMessage;
     MainMenu1: TMainMenu;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
@@ -34,6 +33,7 @@ type
     elementy,zdarzenia,sekcje: TStringList;
     list11,list22: TStringList;
     list1,list2: TList;
+    function LiczbaPinow(aStr: string): integer;
     procedure projekt_load(aFileName: string);
     procedure projekt_unload;
     procedure obiekty_create;
@@ -63,6 +63,21 @@ end;
 procedure TForm1.MenuItem3Click(Sender: TObject);
 begin
   projekt_unload;
+end;
+
+function TForm1.LiczbaPinow(aStr: string): integer;
+var
+  i: integer;
+  s: string;
+begin
+  i:=0;
+  while true do
+  begin
+    s:=GetLineToStr(aStr,i+1,',');
+    if s='' then break;
+    inc(i);
+  end;
+  result:=i;
 end;
 
 procedure TForm1.projekt_load(aFileName: string);
@@ -195,10 +210,11 @@ begin
     s1:=GetLineToStr(s,1,' ');
     s2:=GetLineToStr(s,2,' ');
     s3:=GetLineToStr(s,3,' ');
+    s4:=GetLineToStr(s3,2,':');
     if s2='przycisk' then
     begin
       list11.Add('przycisk');
-      ePrzycisk:=TePrzycisk.Create(StrToInt(s1));
+      ePrzycisk:=TePrzycisk.Create(StrToInt(s1),LiczbaPinow(s4));
       list1.Add(ePrzycisk);
     end;
   end;
@@ -278,18 +294,15 @@ end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 var
-  a: TePins;
+  a: TePrzycisk;
   i: integer;
 begin
-  a:=TePins.Create;
+  a:=TePrzycisk.Create(1,10);
   try
-    a.Add(piZero);
-    a.Add(piPlus);
-    a.Delete(1);
-    a[0]:=piMinus;
-    for i:=0 to a.Count-1 do
+    a.Pins[2]:=piPlus;
+    for i:=0 to a.Pins.Count-1 do
     begin
-      writeln('I=',i,' Value=',a[i]);
+      writeln('I=',i,' Value=',a.Pins[i]);
     end;
   finally
     a.Free;
