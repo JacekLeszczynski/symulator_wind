@@ -74,4 +74,14 @@ Odkrycia:
    by na ekranie były pokazane linie łączące wszystkie elementy ze sobą, by także świeciły się te z nich, które są zasilone.
    To wyjdzie mi samo w trakcie pisania i będę traktował to jako bajer raczej niż coś do czego podążam.
 
+
+Ogólny plan budowy symulatora:
+
+1. Na początku chcę stworzyć szkieletową, logiczną część programu, na razie bez dźwięków, bez złożonych detali wizualnych,
+   tu przycisk to zwykły TButton, żarówka to zwykła kontrolka ledowa itd. Sama logika działania układu. A jak to zacznie działać
+   wtedy wezmę się za pisanie bardziej złożonych detali wizualnych by przycisk był przyciskiem, pewnie wiele róznych jego wersji,
+   podobnie z innymi elementami, przekaźniki to będą przekaźniki, czyli zeskanowane bitmapy tych elementów, animacja pracy,
+   udźwiękowienie itd.
+
+
 To na razie tyle... Będę tu dopisywał to, co przyjdzie mi do głowy...
