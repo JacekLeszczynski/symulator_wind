@@ -13,6 +13,8 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
+    Button1: TButton;
+    Button2: TButton;
     ExtMessage1: TExtMessage;
     MainMenu1: TMainMenu;
     MenuItem1: TMenuItem;
@@ -22,6 +24,7 @@ type
     MenuItem5: TMenuItem;
     MenuItem6: TMenuItem;
     OpenDialog1: TOpenDialog;
+    procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure MenuItem2Click(Sender: TObject);
@@ -271,6 +274,26 @@ begin
   elementy:=TStringList.Create;
   zdarzenia:=TStringList.Create;
   sekcje:=TStringList.Create;
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  a: TePins;
+  i: integer;
+begin
+  a:=TePins.Create;
+  try
+    a.Add(piZero);
+    a.Add(piPlus);
+    a.Delete(1);
+    a[0]:=piMinus;
+    for i:=0 to a.Count-1 do
+    begin
+      writeln('I=',i,' Value=',a[i]);
+    end;
+  finally
+    a.Free;
+  end;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
