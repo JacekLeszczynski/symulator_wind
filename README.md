@@ -32,12 +32,15 @@ To co chcę osiągnąć, to zobaczyć na ekranie prawidłową pracę prostych dw
 1. Cewka przekaźnika załącza żarówkę, przycisk załącza zasilanie cewki.
 
 (+) -------- 1 Włącznik 2 ---------------------- 1 Cewka przekażnika 2 ------------- (-)
+
 (+) -------- 4 Zestyk przekaźnika 5 ------------ 1 Żarówka 2 ----------------------- (-)
 
 2. Cewka przekaźnika mostkuje przycisk włącznika, przez co przekaźnik pracuje jako włącznik bistabilny.
 
 (+) -------- 1 Włącznik 2 ---------------------- 1 Cewka przekażnika 2 ------------- (-)
+
 (+) -------- 4 Zestyk przekaźnika 5 ------------ 1 Cewka przekaźnika 2 ------------- (-)
+
 (+) -------- 7 Zestyk przekaźnika 8 ------------ 1 Żarówka 2 ----------------------- (-)     #(zostanie ujęte)
 
 To co powyżej to projekt dostępny w katalogu DEMO. Dopiero teraz zwróciłem uwagę, że przy drugim obwodzie
